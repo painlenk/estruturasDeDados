@@ -76,4 +76,26 @@ function decToBinary(decNumber) {
   return binaryString;
 }
 
-console.log("binary --> ", decToBinary(25));
+/* console.log("binary --> ", decToBinary(25)); */
+
+const baseConverter = (decimal, base) => {
+  const stack = []; //pilha
+  let rest = 0; //valor que sera recebido de resto da divisao
+  let binaryString = ""; // string que sera construida
+  const hex = "0123456789ABCDEF"; // base de transformação
+
+  while (decimal > 0) {
+    // enquanyo tiver decimal
+    rest = Math.floor(decimal % base); // pega o resto do decimal divido pela base que foi passada
+    stack.push(rest); //insere no array o restante
+    decimal = Math.floor(decimal / base); // divide o decimal pela base
+  }
+
+  while (stack.length > 0) {
+    //enquanto houver valor dentro do array
+    binaryString += hex[stack.pop()]; // vc entra na string hex e pega o valor refertente dentro da pilha e usa como index
+  }
+  return binaryString;
+};
+
+console.log(baseConverter(10, 2));
